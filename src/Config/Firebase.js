@@ -14,20 +14,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-function Register(userInfo) {
-    const { fullname, age, email, password } = userInfo
+async function Register(userInfo) {
+    try{
 
-
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            alert('Register Successfully')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
-        });
+        const { fullname, age, email, password } = userInfo
+    
+    
+       await createUserWithEmailAndPassword(auth, email, password)
+       alert('registered successfully')
+    }catch(e){
+        alert(e.message)
+    }
+        // .then((userCredential) => {
+        //     const user = userCredential.user;
+        //     alert('Register Successfully')
+        // })
+        // .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     alert(errorMessage)
+        // });
 }
 
 function Login(userInfo) {

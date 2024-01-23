@@ -12,8 +12,22 @@ function LoginPage() {
 
     
 function HandleLoginBtn() {
-Login ({email, password})
+    try{
+        Login ({email, password}).then((res) => {
+            console.log("🚀 ~ Login ~ res:", res)
+        
+        	if (res && res.user) {
+                navigate('/')
+            }
+            
+        })
+        navigate('/')
+    }catch(e){
+        console.log("🚀 ~ HandleLoginBtn ~ e:", e)
+        
+    }
 }
+        
 
 
     return (
