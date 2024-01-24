@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
-
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAnC3PQzOC--fDG0DRDUihKkk3on8cGN_4",
@@ -13,46 +13,97 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage();
 
 async function Register(userInfo) {
-    try{
+    try {
 
         const { fullname, age, email, password } = userInfo
-    
-    
-       await createUserWithEmailAndPassword(auth, email, password)
-       alert('registered successfully')
-    }catch(e){
+
+
+          await createUserWithEmailAndPassword(auth, email, password).then((res) => {
+            console.log("🚀 ~ returnawaitcreateUserWithEmailAndPassword ~ res:", res)
+            
+            alert('registered successfully')
+            return res
+
+        })
+        
+        await addDoc(collection(db, "users"), {
+            fullname,
+            age,
+            email,
+            
+          });
+        
+
+    } catch (e) {
         alert(e.message)
     }
-        // .then((userCredential) => {
-        //     const user = userCredential.user;
-        //     alert('Register Successfully')
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     alert(errorMessage)
-        // });
+
+
 }
 
-function Login(userInfo) {
-    const {email, password } = userInfo
+async function Login(userInfo) {
+    try {
+
+        const { email, password } = userInfo
 
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        return await signInWithEmailAndPassword(auth, email, password).then((res) => {
+            console.log("🚀 ~ returnawaitsignInWithEmailAndPassword ~ res:", res)
             alert('Login Successfully')
+            return res
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
-        });
+    } catch (e) {
+        alert(e.message)
+    }
+}
+
+async function PostAdd(ad) {
+    try{
+        const {productname, price, description, quantity, image}= ad
+        
+        
+        const storage = getStorage();
+        const storageRef = ref(storage, `ad/${image.name}`);
+        
+        await uploadBytes(storageRef, image)
+        alert('image uploaded successfully')
+        
+        const url = await getDownloadURL(storageRef)
+        console.log("🚀 ~ postData ~ url:", url)
+        
+        
+        await addDoc(collection(db, "PostAds"), {
+            productname,
+            price,
+        description,
+        quantity,
+        imageUrl:url
+    });
+    alert('post add successfully')
+}catch(e){
+    alert(e.message)
+}
+}
+const getDataFromApi = async()=>{
+    const querySnapshot = await getDocs(collection(db, 'PostAds'));
+    const ads=[]
+querySnapshot.forEach((doc) => {
+    const ad=doc.data();
+    ad.id=doc.id
+    ads.push(ad);
+
+});
+return ads;
+
 }
 
 export {
     Register,
-    Login
+    Login,
+    PostAdd,
+    getDataFromApi
 };

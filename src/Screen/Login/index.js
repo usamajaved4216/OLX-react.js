@@ -11,9 +11,9 @@ function LoginPage() {
 
 
     
-function HandleLoginBtn() {
+async function HandleLoginBtn() {
     try{
-        Login ({email, password}).then((res) => {
+       await Login ({email, password}).then((res) => {
             console.log("🚀 ~ Login ~ res:", res)
         
         	if (res && res.user) {
@@ -21,7 +21,6 @@ function HandleLoginBtn() {
             }
             
         })
-        navigate('/')
     }catch(e){
         console.log("🚀 ~ HandleLoginBtn ~ e:", e)
         

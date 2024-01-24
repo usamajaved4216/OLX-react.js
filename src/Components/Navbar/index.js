@@ -5,7 +5,7 @@ function Navbar() {
 
 
     return (
-        <div style={{ background: 'bisque' }} >
+        <div style={{ background: 'bisque', }} >
             <nav>
                 <h1>Navabar</h1>
                 <button onClick={() => navigate('/Login')} >Login</button>
