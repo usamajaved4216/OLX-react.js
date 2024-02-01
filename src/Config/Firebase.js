@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import {getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -12,7 +12,7 @@ const firebaseConfig = {
     appId: "1:393488946747:web:47d7adffa416c243da6e1e"
 };
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage();
 
@@ -20,6 +20,7 @@ async function Register(userInfo) {
     try {
 
         const { fullname, age, email, password } = userInfo
+        console.log("🚀 ~ Register ~ userInfo:", userInfo)
 
 
           await createUserWithEmailAndPassword(auth, email, password).then((res) => {
@@ -101,9 +102,20 @@ return ads;
 
 }
 
+const userLogout = async () => {
+
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        alert('Successfully logout!')
+    }).catch((error) => {
+        // An error happened.
+    });
+}
+
 export {
     Register,
     Login,
     PostAdd,
-    getDataFromApi
+    getDataFromApi,
+    userLogout
 };
