@@ -1,9 +1,9 @@
 .App {
   text-align: center;
 }
-body{
+/* body{
   background-color: #282c34;
-}
+} */
 button{
   width: 10rem;
   height: 2rem;
@@ -13,6 +13,35 @@ input{
   width: 18rem;
   height: 2rem ;
 }
-p{
-  color: white;
+
+
+
+@media screen and (max-width: 600px) {
+  .BottomNavbar {
+      flex-direction: column;
+      align-items: center;
+  }
+ .inp{
+  flex-direction: column;
+  max-width: 13rem;
+  }
+ .Inp{
+   max-width: 90%;
+  }
+  .mediaremove {
+    display: none;
+    
+  }
+  .mediaIcon {
+    display: inline-block;
+  }
+  .usama{
+    height: 15rem;
+  }
+  .aa{
+    overflow-x: scroll;
+    white-space: normal;
+  }
+  
 }
+ 
