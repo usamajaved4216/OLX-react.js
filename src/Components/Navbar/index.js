@@ -2,19 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, userLogout } from "../../Config/Firebase";
-import TopOlx from '../../assest/olx top.svg'
-import TopCar from '../../assest/car-front.svg'
-import TopBuilding from '../../assest/building.svg'
-import BottomOlx from '../../assest/olx.svg'
-import sellicon from '../../assest/sellicon.svg'
-
-
+import olx from "../../assest/olx.svg";
+import olxTop from "../../assest/olx top.svg";
+import car from "../../assest/car-front.svg";
+import building from "../../assest/building.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 function Navbar() {
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
-
 
     const Logout = () => {
         userLogout(user)
@@ -34,59 +31,68 @@ function Navbar() {
     }, [])
 
     return (
-        <div className="usama" style={{marginBottom:'10%'}}>
-            {/* <div style={{ height: '10rem' }} /> */}
+        <>
+            <header className="main-header">
+                <div className="hamburger-menu">
 
-            <div style={{ position:'fixed', top:0, width:'100%'}} >
-                <header style={{ background: 'rgb(239, 236, 236)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-start' }} >
-                        <img style={{ width: '40px', padding: '0px 30px' }} src={TopOlx} ></img>
-                        <img style={{ padding: '0px 4px 0px 0px' }} src={TopCar} ></img>
-                        <a style={{ padding: '12px 20px 0px 0px' }}>MOTORS</a>
-                        <img style={{ padding: '0px 4px 0px 0px' }} src={TopBuilding} ></img>
-                        <a style={{ padding: '12px 1px 0px 0px' }}>PROPERTY</a>
-                        <button onClick={Logout}  >Logout</button>
+                    <a href="#">
+                        <GiHamburgerMenu/>
+                    </a>
+                </div>
+                <div className="logos">
+                    <img style={{
+                        width: '65%'
+                    }} src={olxTop} />
+                </div>
+                <div className="car">
+                    <img style={{
+                        width: '15%'
+                    }} src={car} />
+                    <p>MOTORS</p>
+                </div>
+                <div className="building">
+                    <img style={{
+                        width: '15%'
+                    }} src={building} />
+                    <p>PROPERTY</p>
+                </div>
+            </header>
+            <nav className="main-nav">
+                
+                {/* 1st logo */}
+                
+                <div className="logo">
+                    <img style={{
+                        width: '100%'
+                    }} src={olx} />
+                </div>
+                
+                {/* Search Bar */}
 
-                    </div>
-                </header>
-                <nav style={{ background: 'rgb(239, 236, 236)', display: 'flex', justifyContent: 'flex-start' }} className='BottomNavbar' >
+                <div className="place-holder">
+                    <input placeholder="Pakistan" />
+                </div>
 
-                    <img className='mediaremove' style={{ width: '80px', padding: '0px 20px' }} src={BottomOlx} ></img>
-                    <input className='inp' style={{
-                        width: '15rem',
-                        height: '40px',
-                        margin: '12px 10px 0px 0px',
-                        border: '2px solid black',
-                        borderRadius: '5px'
-                    }} placeholder='Pakistan' ></input>
-                    <input className='Inp' style={{ width: '45rem', height: '40px', margin: '12px 0px 0px 0px', border: '2px solid black', borderRadius: '5px' }} placeholder='Pakistan' ></input>
+                <div className="place-holder2">
+                    <input placeholder="Fine Car,Mobile Phone And More..." />
+                </div>
 
+                {/* buttons icons */}
+
+                <div className={"menu-link"}>
                     {user ?
-
                         <h3>{user.email}</h3> :
-                        <button onClick={() => navigate('/Login')} style={{ height: '3rem', fontWeight: 'bold', fontSize: '20px', marginTop: '10px', border: 'none', background: 'none', width: '7%' }} ><u>Login</u></button>
+                        <button className="btn1" onClick={() => navigate('/Login')} ><u>login</u></button>
                     }
+                    {user ?
+                        <button onClick={Logout}  >Logout</button> : null
 
-                    <div style={{ cursor: 'pointer', display: "flex", flexDirection: "column", alignItems: "center", marginRight: 10, marginTop: 10 }}>
-                        <div style={{ position: "relative" }}>
-                            <img src={sellicon} style={{ width: '5.5rem' }}></img>
-                            <span onClick={() => navigate('/Sell')} style={{ position: "absolute", top: "45%", left: "48%", transform: "translate(-50%, -50%)", color: "black", fontSize: 15, fontWeight: 'bold' }}>+SELL</span>
-                        </div>
-                    </div>
-                </nav>
+                    }
+                    <button className="btn1" onClick={() => navigate('/Sell')}>+sell</button>
 
-
-
-
-
-
-
-            </div>
-        </div>
-
-
-
-
+                </div>
+            </nav>
+        </>
     )
 }
 

@@ -44,9 +44,9 @@ function LoginPage() {
                     <h2 style={{ marginLeft: '10px' }} >OLX Login Page</h2>
                 </div>
                 <p style={{ display: "flex", marginLeft: '15px' }} >Email</p>
-                <input style={{ width: '90%', height: '30px', border: 'none', paddingLeft:10 }} placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} />
+                <input style={{ width: '90%', height: '30px', border: 'none', paddingLeft: 10 }} placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} />
                 <p style={{ display: "flex", marginLeft: '15px' }} >Password</p>
-                <input style={{ width: '90%', height: '30px', border: 'none', paddingLeft:10 }} placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
+                <input style={{ width: '90%', height: '30px', border: 'none', paddingLeft: 10 }} placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
                 <p style={{ display: "flex", marginLeft: '15px' }} >Forgotten Password</p>
                 <button onClick={HandleLoginBtn} style={{ width: '90%', height: '30px', border: 'none', background: '#002F34', color: 'white', cursor: "pointer" }} >Login</button>
                 <p>Don't You Have An Account</p>

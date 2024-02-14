@@ -6,9 +6,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-<BrowserRouter>
-<RouterApp/>
-</BrowserRouter>        
+        <BrowserRouter>
+          <RouterApp />
+        </BrowserRouter>
       </header>
     </div>
   );

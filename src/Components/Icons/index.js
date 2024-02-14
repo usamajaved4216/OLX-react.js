@@ -1,7 +1,5 @@
 function Categories() {
 
-
-    
     return (  
         <div >
             
