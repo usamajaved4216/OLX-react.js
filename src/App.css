@@ -285,7 +285,7 @@ justify-content: center;
 
 /* Footer */
 .main-footer{
-  background-color: blueviolet;
+  background-color: rgb(233, 224, 224);
   display: grid;
   grid-template-columns: 2rem 1fr 1fr 1fr 1fr 1fr 2rem;
 }
